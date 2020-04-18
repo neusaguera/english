@@ -203,7 +203,8 @@ function fillCards(list){
     var li = document.createElement("li");
     var select = document.createElement("select");
     var span = document.createElement("span");
-    var cloneLi, cloneSelect, cloneSpan;
+    var label = document.createElement("label");
+    var cloneLi, cloneSelect, cloneSpan, cloneLabel;
     
     list.forEach(function(item, index){
         cloneLi = li.cloneNode();
@@ -212,14 +213,20 @@ function fillCards(list){
         nameId = "gameItem" + index;
         cloneLi.id =  nameId;
         cloneSelect = select.cloneNode();
+        cloneSelect.id = "select" + nameId;
         cloneSelect.classList.add("select-word");
         addOptionSelect(cloneSelect);
+        cloneLabel = label.cloneNode();
+        cloneLabel.textContent = item.word;
+        cloneLabel.htmlFor = "select" + nameId;
+        cloneLabel.classList.add("label-select-game");
         cloneSpan = span.cloneNode();
         cloneSpan.classList.add("hide");
         cloneSpan.textContent = item.transcription;
         handleOnChange(nameId, cloneSelect, item);
         cloneLi.appendChild(cloneSpan);
         cloneLi.appendChild(cloneSelect);
+        cloneLi.appendChild(cloneLabel);
         listID.appendChild(cloneLi);
     });
 
@@ -237,12 +244,13 @@ function shuffle(a) {
 
 
 function addOptionSelect(select){
-    select.options[select.options.length] = new Option("", -1);
+    
+    select.options[select.options.length] = new Option("choose option", -1);
     select.options[select.options.length] = new Option("-T", 0);
     select.options[select.options.length] = new Option("-D", 1);
     select.options[select.options.length] = new Option("-ID", 2);
     
-
+    select.options[0].disabled = true;
     return select;
 }
 

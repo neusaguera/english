@@ -161,3 +161,7 @@ h1, h2, h3, h4 {
     border: 1px solid #ccc;
     border-radius: 3px;
 }
+
+.label-select-game{
+    display: none;
+}
