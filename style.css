@@ -136,24 +136,9 @@ h1, h2, h3, h4 {
     display: inline;
 }
 
-.select-word  option:first-child {
-    display: none;
-}
-
-@media (min-width: 1024px) {  
-    .select-word  option:nth-child(2) {
-        display: none;
-    }
-    
-    .select-word  option:first-child {
-        display: block;
-    }
-}
-
 .text-game{
     margin-bottom: 12px;
 }
-
 .result-game {
     display: block;
     background: #f8f8f8;
