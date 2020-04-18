@@ -215,7 +215,7 @@ function fillCards(list){
         cloneSelect = select.cloneNode();
         cloneSelect.id = "select" + nameId;
         cloneSelect.classList.add("select-word");
-        addOptionSelect(cloneSelect);
+        addOptionSelect(item.word, cloneSelect);
         cloneLabel = label.cloneNode();
         cloneLabel.textContent = item.word;
         cloneLabel.htmlFor = "select" + nameId;
@@ -243,14 +243,16 @@ function shuffle(a) {
 }
 
 
-function addOptionSelect(select){
-    
-    select.options[select.options.length] = new Option("choose option", -1);
+function addOptionSelect(word, select){
+    var text = word;
+    select.options[select.options.length] = new Option("choose option", -2);
+    select.options[select.options.length] = new Option(text, -1);
     select.options[select.options.length] = new Option("-T", 0);
     select.options[select.options.length] = new Option("-D", 1);
     select.options[select.options.length] = new Option("-ID", 2);
     
     select.options[0].disabled = true;
+    select.options[1].disabled = true;
     return select;
 }
 
