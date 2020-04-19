@@ -248,9 +248,9 @@ function addOptionSelect(word, select){
     var text = "choose option for " + word;
     if(isMobile == true){
 
-        select.options[select.options.length] = new Option("choose option", -1);
-    } else {
         select.options[select.options.length] = new Option(text, -2);
+    } else {
+        select.options[select.options.length] = new Option("choose option", -1);
     }
     select.options[select.options.length] = new Option("-T", 0);
     select.options[select.options.length] = new Option("-D", 1);
