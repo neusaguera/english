@@ -162,6 +162,14 @@ var totalCorrect = 0;
 var isMobile;
 
 
+var rowsBingo = 3;
+var cellBingo = 3;
+var arrayWordsBingo = [];
+var shuffleArrayBingo = [];
+var nextWord = 0;
+var totalCells = 0;
+var arrayResult = [];
+
 
 window.onload = function init() {
     fillList(this.soundD, "listSoundD");
