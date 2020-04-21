@@ -161,6 +161,8 @@ var arrayWordsGame = [];
 var totalCorrect = 0;
 var isMobile;
 
+
+
 window.onload = function init() {
     fillList(this.soundD, "listSoundD");
     fillList(this.soundT, "listSoundT");
@@ -168,6 +170,8 @@ window.onload = function init() {
     isMobile = mobileCheck();
     gameWords(4);
     updateScore(this.totalCorrect, this.arrayWordsGame.length);
+   
+    newBingo();
 }
 
 function fillList(list,nameTag){
@@ -318,3 +322,112 @@ function mobileCheck() {
   
     return check;
 };
+
+
+
+function fillArrayBingo(){
+
+    arrayLists.forEach(function(list,index){
+        var shuffleList = shuffle(list);
+        for(var i = 0; i < cellBingo ; i++){
+            var valueToPush = { }; 
+            valueToPush["listID"] = index;
+            valueToPush["word"] = shuffleList[i][0];
+            valueToPush["transcription"] = shuffleList[i][1];
+            if(index == 0){
+                valueToPush["finished"] = "-T";
+            } else if(index == 1){
+                valueToPush["finished"] = "-D";
+            } else {
+                valueToPush["finished"] = "-ID"
+            }
+
+            arrayWordsBingo.push(valueToPush);
+        }
+    });
+}
+
+
+function fillBingo(){
+    var list = shuffle(arrayWordsBingo);
+    
+    var tableID = document.getElementById("bingoBoard");
+    var tr = document.createElement("tr");
+    var td = document.createElement("td");
+    var button = document.createElement("button");
+
+    var cloneTr, cloneTd, cloneButton;
+    
+
+
+    for(var row = 0; row < rowsBingo; row++){
+        cloneTr = tr.cloneNode();
+        for(var cell = 0; cell < cellBingo; cell++){
+            cloneTd = td.cloneNode();
+            cloneButton = button.cloneNode();
+            cloneButton.value = list[totalCells].listID;
+            cloneButton.textContent = list[totalCells].finished;
+            handleOnClick(cloneButton);
+            cloneTr.appendChild(cloneTd);
+            cloneTd.appendChild(cloneButton);
+            totalCells = totalCells + 1;
+        }
+
+        tableID.appendChild(cloneTr);
+
+    }
+}
+
+function showBingoWord(list){
+
+
+    var word = document.getElementById("bingoWord");
+    word.textContent = list[nextWord].word;
+
+}
+
+function handleOnClick(button){
+
+    button.onclick = function(){
+        if(button.value == shuffleArrayBingo[nextWord].listID){
+
+            button.classList.add("correct");
+        } else {
+            button.classList.add("wrong");
+        }
+        button.disabled = true;
+
+        if(nextWord < (totalCells - 1)){
+            nextWord += 1;
+            showBingoWord(shuffleArrayBingo);
+        } else {
+            showResultBingo();
+        }
+    }
+}
+
+function showResultBingo(){
+    var word = document.getElementById("bingoWord");
+    word.textContent = "COMPLET!!";
+    var correctSpan = document.getElementById("totalBingoCorrectLines");
+    //correctSpan.textContent = totalCorrect;
+    var totalSpan = document.getElementById("totalBingoLines");
+   // totalSpan.textContent = rowsBingo;
+}
+
+function newBingo(){
+    removeBingoCells();
+    fillArrayBingo();
+   fillBingo();
+    
+   shuffleArrayBingo = shuffle(arrayWordsBingo);
+   showBingoWord(shuffleArrayBingo);
+}
+
+function removeBingoCells(){
+    var table = document.getElementById("bingoBoard");
+
+    while (table.lastElementChild) {
+        table.removeChild(table.lastElementChild);
+    }
+}

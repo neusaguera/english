@@ -148,6 +148,10 @@ h1, h2, h3, h4 {
     margin-bottom: 36px;
     position: relative;
 }
+.result-game.bingo{
+    width: 50%;
+    padding: 12px 0;
+}
 
 .btn-newgame {
     position: absolute;
@@ -164,3 +168,43 @@ h1, h2, h3, h4 {
 .label-select-game{
     display: none;
 }
+
+.bingo-board{
+    width: 50%;
+}
+.bingo-board td{
+    width: 33%;
+}
+
+.bingo-board button{
+    position: relative;
+    width: 100%;
+    height: 100px;
+    border: 4px solid;
+    font-size: 48px;
+}
+.bingo-board button.correct::before, .bingo-board button.wrong::before{
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    height: 84px;
+    width: 85%;
+    transform: translateX(-50%);
+    border: 4px solid #cfffcf;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.5);
+}
+.bingo-board button.wrong::before{
+    border: 4px solid #fdc8c8;
+}
+
+.bingo-word {
+    width: 50%;
+    text-align: center;
+    font-size: 24px;
+    background: #f8f8f8;
+    padding: 12px 0;
+}
+
