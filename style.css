@@ -173,7 +173,7 @@ h1, h2, h3, h4 {
     width: 100%;
 }
 @media (min-width: 360px) {  
-    .word-game {
+    .bingo-board {
         max-width: 100%;
     }
 }
